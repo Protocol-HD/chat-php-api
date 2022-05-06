@@ -17,8 +17,8 @@ $result = mysqli_query($db, "SELECT messages.id, messages.room_id, messages.send
 
 $dbdata = array();
 
-while ( $row = $result->fetch_assoc())  {
-    $dbdata[]=$row;
+while ($row = $result->fetch_assoc()) {
+    $dbdata[] = $row;
 }
 
 echo json_encode($dbdata);

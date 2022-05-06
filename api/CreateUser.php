@@ -14,6 +14,6 @@ $database = new Database();
 
 $db = $database->getConnection();
 
-$result =  mysqli_query($db, "INSERT INTO user VALUES(null, '$data->email', '$data->password', '$data->nick_name')");
+$result = mysqli_query($db, "INSERT INTO user VALUES(null, '$data->email', '$data->password', '$data->nick_name')");
 
 echo $result;

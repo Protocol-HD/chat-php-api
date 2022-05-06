@@ -15,8 +15,8 @@ $result = mysqli_query($db, 'SELECT * FROM messages');
 
 $dbdata = array();
 
-while ( $row = $result->fetch_assoc())  {
-    $dbdata[]=$row;
+while ($row = $result->fetch_assoc()) {
+    $dbdata[] = $row;
 }
 
 echo json_encode($dbdata);

@@ -14,6 +14,6 @@ $database = new Database();
 
 $db = $database->getConnection();
 
-$result =  mysqli_query($db, "INSERT INTO messages VALUES(null, $data->room_id, $data->send_user_id, '$data->message_text', default)");
+$result = mysqli_query($db, "INSERT INTO messages VALUES(null, $data->room_id, $data->send_user_id, '$data->message_text', default)");
 
 echo $result;
