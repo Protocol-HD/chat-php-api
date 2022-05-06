@@ -1,21 +1,24 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 include_once '../config/Database.php';
 
-$json = file_get_contents("php://input");
-$data = json_decode($json);
+$room_id = $_GET['room'];
 
 $database = new Database();
 
 $db = $database->getConnection();
 
-$result = mysqli_query($db, "INSERT INTO room VALUES(null, $data->owner_id, '$data->name')");
+$result = mysqli_query($db, "SELECT DISTINCT(send_user_id) FROM messages WHERE room_id = $room_id");
 
-echo mysqli_insert_id($db);
+$dbdata = array();
 
-// echo $result;
+while ($row = $result->fetch_assoc()) {
+    $dbdata[] = $row;
+}
+
+echo json_encode($dbdata);

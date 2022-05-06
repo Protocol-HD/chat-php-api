@@ -18,17 +18,3 @@ if ($login) {
 } else {
     echo 0;
 }
-
-// $database = new Database();
-
-// $db = $database->getConnection();
-
-// $result = mysqli_query($db, "SELECT * FROM user WHERE email = '$data->email' AND password = '$data->password'");
-
-// $row = mysqli_fetch_assoc($result);
-
-// if (count((array)$row)) {
-//     echo encode($row["email"], $row["password"]);
-// } else {
-//     echo false;
-// }

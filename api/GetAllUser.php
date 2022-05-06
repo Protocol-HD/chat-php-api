@@ -20,10 +20,3 @@ while ($row = $result->fetch_assoc()) {
 }
 
 echo json_encode($dbdata);
-// while($row = mysqli_fetch_array($result)) {
-//     echo $row['id'];
-//     echo $row['email'];
-//     echo $row['password'];
-//     echo $row['nick_name'];
-//     echo "<br/>";
-// }
