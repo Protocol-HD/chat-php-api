@@ -11,7 +11,7 @@ $database = new Database();
 
 $db = $database->getConnection();
 
-$result = mysqli_query($db, 'SELECT room.id, room.name, user.id AS user_id, user.nick_name FROM room JOIN user ON room.owner_id = user.id');
+$result = mysqli_query($db, 'SELECT room.id, room.name, user.id AS user_id, user.nick_name FROM room JOIN user ON room.owner_id = user.id ORDER BY room.id');
 
 $dbdata = array();
 

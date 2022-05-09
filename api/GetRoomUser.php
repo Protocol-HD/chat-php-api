@@ -13,7 +13,7 @@ $database = new Database();
 
 $db = $database->getConnection();
 
-$result = mysqli_query($db, "SELECT DISTINCT(send_user_id) FROM messages WHERE room_id = $room_id");
+$result = mysqli_query($db, "SELECT DISTINCT(messages.send_user_id), user.nick_name FROM messages JOIN user ON messages.send_user_id = user.id WHERE messages.room_id = $room_id");
 
 $dbdata = array();
 

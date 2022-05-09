@@ -1,24 +1,19 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: DELETE");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 include_once '../config/Database.php';
 
-$json = file_get_contents("php://input");
-$data = json_decode($json);
+$room_id = $_GET['room'];
 
 $database = new Database();
 
 $db = $database->getConnection();
 
-$result = mysqli_query($db, "INSERT INTO room VALUES(null, $data->owner_id, '$data->name')");
+$result = mysqli_query($db, "DELETE FROM messages WHERE room_id = $room_id");
+$result = mysqli_query($db, "DELETE FROM room WHERE id = $room_id");
 
-$roomId = mysqli_insert_id($db);
-
-$result = mysqli_query($db, "SELECT * FROM room WHERE id = $roomId");
-
-
-echo json_encode($result->fetch_assoc());
+echo $result;

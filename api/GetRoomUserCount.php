@@ -1,24 +1,22 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 include_once '../config/Database.php';
 
-$json = file_get_contents("php://input");
-$data = json_decode($json);
-
 $database = new Database();
 
 $db = $database->getConnection();
 
-$result = mysqli_query($db, "INSERT INTO room VALUES(null, $data->owner_id, '$data->name')");
+$result = mysqli_query($db, "SELECT COUNT(DISTINCT(any_value(send_user_id))) AS user_count, any_value(room.id) AS room_id FROM messages JOIN room ON messages.room_id = room.id GROUP BY room.id");
 
-$roomId = mysqli_insert_id($db);
+$dbdata = array();
 
-$result = mysqli_query($db, "SELECT * FROM room WHERE id = $roomId");
+while ($row = $result->fetch_assoc()) {
+    $dbdata[] = $row;
+}
 
-
-echo json_encode($result->fetch_assoc());
+echo json_encode($dbdata);

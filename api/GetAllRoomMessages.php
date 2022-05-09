@@ -12,8 +12,9 @@ $database = new Database();
 $db = $database->getConnection();
 
 $room_id = $_GET['room'];
+$limit = $_GET['limit'];
 
-$result = mysqli_query($db, "SELECT messages.id, messages.room_id, messages.send_user_id, messages.message_text, messages.send_time, user.nick_name FROM messages JOIN user ON messages.send_user_id = user.id WHERE messages.room_id = $room_id");
+$result = mysqli_query($db, "(SELECT messages.id, messages.room_id, messages.send_user_id, messages.message_text, messages.send_time, user.nick_name FROM messages JOIN user ON messages.send_user_id = user.id WHERE messages.room_id = $room_id ORDER BY send_time desc limit $limit) ORDER BY send_time");
 
 $dbdata = array();
 
