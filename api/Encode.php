@@ -1,6 +1,6 @@
 <?php
 
-function encode($user_id, $user_email, $user_password, $user_nick_name)
+function encode($user_id, $user_email, $user_password, $user_nick_name, $exp)
 {
     include_once '../config/Jwt.php';
 
@@ -19,7 +19,7 @@ function encode($user_id, $user_email, $user_password, $user_nick_name)
     $nick_name = base64_encode($nick_name);
 
     $token = $jwt->hashing(array(
-        'exp' => time() + (60 * 60 * 30), // 만료기간
+        'exp' => time() + ($exp), // 만료기간
         'iat' => time(), // 생성일
         'id' => $id,
         'email' => $email,

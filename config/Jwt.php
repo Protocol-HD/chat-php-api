@@ -29,12 +29,12 @@ class JWT
         $signature = $parted[2];
 
         if (hash($this->alg, $parted[0] . $parted[1] . $this->secret_key) != $signature) {
-            return false; // 시그니쳐 오류
+            return -2; // 시그니쳐 오류
         }
 
         $payload = json_decode($parted[1], true);
         if ($payload['exp'] < time()) {
-            return false; // 만료 오류
+            return -1; // 만료 오류
         }
 
         return json_decode($parted[1], true);

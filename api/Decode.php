@@ -8,7 +8,7 @@ function decode($token)
 
     $data = $jwt->dehashing($token);
 
-    if ($data) {
+    if ($data != -1 && $data != -2) {
         $id = base64_decode($data['id']);
         $email = base64_decode($data['email']);
         $password = base64_decode($data['password']);
@@ -16,11 +16,11 @@ function decode($token)
 
         return array(
             'id' => $id,
-            // 'email' => $email,
-            // 'password' => $password,
+            'email' => $email,
+            'password' => $password,
             'nick_name' => $nick_name,
         );
     } else {
-        return false;
+        echo $data;
     }
 }

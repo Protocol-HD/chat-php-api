@@ -7,17 +7,17 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include_once '../config/Database.php';
 include_once "Decode.php";
+include_once "../config/Auth.php";
 
 $json = file_get_contents("php://input");
 $data = json_decode($json);
 
-$login = decode($data->access_token);
+$login = decode($data->refresh_token);
 
 if ($login) {
-    echo json_encode(array(
-        "id" => $login["id"],
-        "nick_name" => $login["nick_name"]
-    ));
+    auth($login["email"], $login["password"]);
 } else {
     echo $login;
 }
+
+
