@@ -14,8 +14,8 @@ function auth($email, $password)
 
     if (count((array) $row)) {
         echo json_encode(array(
-            "access_token" => encode($row['id'], $row["email"], $row["password"], $row["nick_name"], 60*10),
-            "refresh_token" => encode($row['id'], $row["email"], $row["password"], $row["nick_name"], 60*60),
+            "access_token" => encode($row['id'], $row["email"], $row["password"], $row["nick_name"], 60 * 10),
+            "refresh_token" => encode($row['id'], $row["email"], $row["password"], $row["nick_name"], 60 * 60),
         ));
         // echo encode($row['id'], $row["email"], $row["password"], $row["nick_name"], 60*60);
     } else {

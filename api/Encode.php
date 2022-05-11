@@ -8,7 +8,7 @@ function encode($user_id, $user_email, $user_password, $user_nick_name, $exp)
 
     $id = $user_id;
     $id = base64_encode($id);
-    
+
     $email = $user_email;
     $email = base64_encode($email);
 
